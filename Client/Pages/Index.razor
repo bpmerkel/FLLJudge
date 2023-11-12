@@ -1,16 +1,16 @@
 ﻿@page "/"
+@inject Model model
 
 <PageTitle>FLL Judge Comments</PageTitle>
 
 <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
     <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
-        <MudTabPanel Text="Core Values">
-
-        </MudTabPanel>
-        <MudTabPanel Text="Innovation Project">
-
-        </MudTabPanel>
-        <MudTabPanel Text="Robot Design">
+        @foreach (var area in Areas)
+        {
+            <MudTabPanel Text="@area">
+            </MudTabPanel>
+        }
+        <MudTabPanel Text="Test">
             <MudChipSet MultiSelection="true" Filter="true">
                 <MudChip Text="1" Variant="Variant.Text" Color="Color.Primary">Favorite</MudChip>
                 <MudChip Text="2" Variant="Variant.Text" Color="Color.Primary">Popular</MudChip>
@@ -27,7 +27,7 @@
                                   Adornment="Adornment.End" Immediate="true" Variant="Variant.Outlined" />
                 </MudListSubheader>
 
-                @foreach (var comment in comments)
+                @foreach (var comment in RDcomments)
                 {
                     <MudListItem>
                         <MudRating SelectedValue="2" Size="Size.Large" MaxValue="3" />
@@ -51,10 +51,6 @@
     // create chips, use highlighter and list
 
     string searchTerm = "it";
-    IEnumerable<string> comments = new List<string>
-    {
-        "This is the first item",
-        "This is the second item",
-        "This is the third item"
-    };
+    public List<string> Areas => model.areas?.Select(a => a.name).ToList();
+    public List<string> RDcomments => model?.areas.Last().comments?.Select(c => c.text).ToList();
 }

@@ -1,0 +1,34 @@
+{
+  "areas": [
+    {
+      "name": "Core Values",
+      "comments": [
+        {
+          "key": 0,
+          "text": "cv1",
+          "rating": 3
+        }
+      ]
+    },
+    {
+      "name": "Innovation Project",
+      "comments": [
+        {
+          "key": 0,
+          "text": "ip1",
+          "rating": 3
+        }
+      ]
+    },
+    {
+      "name": "Robot Design",
+      "comments": [
+        {
+          "key": 0,
+          "text": "rd1",       
+          "rating": 3
+        }
+      ]
+    }
+  ]
+}
