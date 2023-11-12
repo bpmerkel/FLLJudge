@@ -5,11 +5,11 @@
 
 <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
     <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
-        @foreach (var area in model.areas)
+        @foreach (var area in model.Areas)
         {
-            <MudTabPanel Text="@area.name">
+            <MudTabPanel Text="@area.Name">
                 <MudChipSet MultiSelection="true" Filter="true">
-                    @foreach (var chip in area.chips)
+                    @foreach (var chip in area.Chips)
                     {
                         <MudChip Text="@chip" Variant="Variant.Text" Color="Color.Primary">@chip</MudChip>
                     }
@@ -20,13 +20,13 @@
                                       Adornment="Adornment.End" Immediate="true" Variant="Variant.Outlined" />
                     </MudListSubheader>
 
-                    @foreach (var comment in area.comments)
+                    @foreach (var comment in area.Comments)
                     {
                         <MudListItem>
                             <MudRating SelectedValue="2" Size="Size.Large" MaxValue="3" />
                             <MudHighlighter Class="mud-primary-text"
                                             Style="background-color:transparent;font-weight:bold"
-                                            Text="@comment.text"
+                                            Text="@comment.Text"
                                             UntilNextBoundary="true"
                                             CaseSensitive="false"
                                             Markup="true"
