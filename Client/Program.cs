@@ -11,7 +11,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddSingleton(s =>
 {
-    var httpClient = s.GetRequiredService<HttpClient>();
+    using var httpClient = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
     return Model.GetModel(httpClient);
 });
 
