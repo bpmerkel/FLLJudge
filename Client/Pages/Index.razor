@@ -1,3 +1,24 @@
 ﻿@page "/"
 
 <PageTitle>FLL Judge Comments</PageTitle>
+
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
+    <MudTabPanel Text="Core Values">
+
+    </MudTabPanel>
+    <MudTabPanel Text="Innovation Project">
+
+    </MudTabPanel>
+    <MudTabPanel Text="Robot Design">
+        <MudChipSet MultiSelection="true" Filter="true">
+            <MudChip Text="1" Variant="Variant.Text" Color="Color.Primary">Favorite</MudChip>
+            <MudChip Text="2" Variant="Variant.Text" Color="Color.Primary">Popular</MudChip>
+            <MudChip Text="3" Variant="Variant.Text" Color="Color.Primary">Strategy</MudChip>
+            <MudChip Text="4" Variant="Variant.Text" Color="Color.Primary">Mechanics</MudChip>
+            <MudChip Text="5" Variant="Variant.Text" Color="Color.Primary">Code</MudChip>
+            <MudChip Text="6" Variant="Variant.Text" Color="Color.Primary">Process</MudChip>
+            <MudChip Text="7" Variant="Variant.Text" Color="Color.Primary">Team</MudChip>
+        </MudChipSet>
+
+    </MudTabPanel>
+</MudTabs>
