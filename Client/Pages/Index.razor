@@ -5,52 +5,41 @@
 
 <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
     <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
-        @foreach (var area in Areas)
+        @foreach (var area in model.areas)
         {
-            <MudTabPanel Text="@area">
+            <MudTabPanel Text="@area.name">
+                <MudChipSet MultiSelection="true" Filter="true">
+                    @foreach (var chip in area.chips)
+                    {
+                        <MudChip Text="@chip" Variant="Variant.Text" Color="Color.Primary">@chip</MudChip>
+                    }
+                </MudChipSet>
+                <MudList>
+                    <MudListSubheader>
+                        <MudTextField @bind-Value="@searchTerm" AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Adornment="Adornment.End" Immediate="true" Variant="Variant.Outlined" />
+                    </MudListSubheader>
+
+                    @foreach (var comment in area.comments)
+                    {
+                        <MudListItem>
+                            <MudRating SelectedValue="2" Size="Size.Large" MaxValue="3" />
+                            <MudHighlighter Class="mud-primary-text"
+                                            Style="background-color:transparent;font-weight:bold"
+                                            Text="@comment.text"
+                                            UntilNextBoundary="true"
+                                            CaseSensitive="false"
+                                            Markup="true"
+                                            HighlightedText="@searchTerm" />
+                        </MudListItem>
+                    }
+                </MudList>
             </MudTabPanel>
         }
-        <MudTabPanel Text="Test">
-            <MudChipSet MultiSelection="true" Filter="true">
-                <MudChip Text="1" Variant="Variant.Text" Color="Color.Primary">Favorite</MudChip>
-                <MudChip Text="2" Variant="Variant.Text" Color="Color.Primary">Popular</MudChip>
-                <MudChip Text="3" Variant="Variant.Text" Color="Color.Primary">Strategy</MudChip>
-                <MudChip Text="4" Variant="Variant.Text" Color="Color.Primary">Mechanics</MudChip>
-                <MudChip Text="5" Variant="Variant.Text" Color="Color.Primary">Code</MudChip>
-                <MudChip Text="6" Variant="Variant.Text" Color="Color.Primary">Process</MudChip>
-                <MudChip Text="7" Variant="Variant.Text" Color="Color.Primary">Team</MudChip>
-            </MudChipSet>
-
-            <MudList>
-                <MudListSubheader>
-                    <MudTextField @bind-Value="@searchTerm" AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Adornment="Adornment.End" Immediate="true" Variant="Variant.Outlined" />
-                </MudListSubheader>
-
-                @foreach (var comment in RDcomments)
-                {
-                    <MudListItem>
-                        <MudRating SelectedValue="2" Size="Size.Large" MaxValue="3" />
-                        <MudHighlighter Class="mud-primary-text"
-                                        Style="background-color:transparent;font-weight:bold"
-                                        Text="@comment"
-                                        UntilNextBoundary="true"
-                                        CaseSensitive="false"
-                                        Markup="true"
-                                        HighlightedText="@searchTerm" />
-                    </MudListItem>
-                }
-            </MudList>
-        </MudTabPanel>
     </MudTabs>
 </MudAppBar>
 
 @code
 {
-    // on initialization, read values, parse for tokens,
-    // create chips, use highlighter and list
-
     string searchTerm = "it";
-    public List<string> Areas => model.areas?.Select(a => a.name).ToList();
-    public List<string> RDcomments => model?.areas.Last().comments?.Select(c => c.text).ToList();
 }
