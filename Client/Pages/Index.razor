@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject Model model
+@inject Task<Model> _getModel
 
 <PageTitle>FLL Judge Comments</PageTitle>
 
@@ -42,4 +42,10 @@
 @code
 {
     string searchTerm = "it";
+    Model model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await _getModel;
+    }
 }

@@ -2,19 +2,18 @@
 using System.Text.Json.Serialization;
 
 namespace BlazorApp.Client;
-
+// see https://stackoverflow.com/questions/58523617/blazor-client-side-webassembly-reading-a-json-file-on-startup-cs
 public class Model
 {
     [JsonPropertyName("areas")]
-    public List<Area>? Areas {  get; set; }
-    
-    public static Model GetModel()
+    public List<Area>? Areas { get; set; }
+
+    public async static Task<Model> GetModel(HttpClient httpClient)
     {
-        var file = "comments.json";
-        // deserialize the json file
-        var json = File.ReadAllText(file);
+        var json = await httpClient.GetStringAsync("comments.json")
+            .ConfigureAwait(false);
         var model = JsonSerializer.Deserialize<Model>(json);
-        foreach(var area in model.Areas)
+        foreach (var area in model.Areas)
         {
             if (area == null) continue;
             area.Chips = area.Comments
