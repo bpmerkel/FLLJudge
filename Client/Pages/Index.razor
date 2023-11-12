@@ -3,49 +3,71 @@
 
 <PageTitle>FLL Judge Comments</PageTitle>
 
-<MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
+@if (model != null)
+{
     <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
         @foreach (var area in model.Areas)
         {
-            <MudTabPanel Text="@area.Name">
-                <MudChipSet MultiSelection="true" Filter="true">
-                    @foreach (var chip in area.Chips)
+            <MudTabPanel Text="@area.Name" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
+                <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
+                    @foreach (var tag in area.Tags)
                     {
-                        <MudChip Text="@chip" Variant="Variant.Text" Color="Color.Primary">@chip</MudChip>
+                        <MudChip Text="@tag" Variant="Variant.Text" Color="Color.Primary">@tag</MudChip>
                     }
                 </MudChipSet>
-                <MudList>
-                    <MudListSubheader>
-                        <MudTextField @bind-Value="@searchTerm" AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Adornment="Adornment.End" Immediate="true" Variant="Variant.Outlined" />
-                    </MudListSubheader>
-
-                    @foreach (var comment in area.Comments)
+                <MudList Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
+                    @foreach (var section in area.Comments.GroupBy(c => c.Section).Select(g => new { section = g.Key, comments = g.ToList() }))
                     {
-                        <MudListItem>
-                            <MudRating SelectedValue="2" Size="Size.Large" MaxValue="3" />
-                            <MudHighlighter Class="mud-primary-text"
-                                            Style="background-color:transparent;font-weight:bold"
-                                            Text="@comment.Text"
-                                            UntilNextBoundary="true"
-                                            CaseSensitive="false"
-                                            Markup="true"
-                                            HighlightedText="@searchTerm" />
+                        <MudListItem Text="@getSectionName(section.section)" Expanded="true" InitiallyExpanded="true" Style="font-size:16pt;font-weight:bold">
+                            <NestedList>
+                                @foreach (var comment in section.comments)
+                                {
+                                    <MudListItem>
+                                        <MudCheckBox @bind-Checked="comment.Selected" Dense="true" Color="@Color.Primary">
+                                            <MudHighlighter Class="mud-success-text"
+                                                            Style="background-color:transparent;font-weight:bold"
+                                                            Text="@comment.Text"
+                                                            UntilNextBoundary="true"
+                                                            CaseSensitive="false"
+                                                            Markup="true"
+                                                            HighlightedTexts="@searchTerms" />
+                                        </MudCheckBox>
+                                    </MudListItem>
+                                }
+                            </NestedList>
                         </MudListItem>
                     }
                 </MudList>
             </MudTabPanel>
         }
     </MudTabs>
-</MudAppBar>
+}
+else
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
+}
+
 
 @code
 {
-    string searchTerm = "it";
-    Model model { get; set; }
+    Model model;
+    MudChip[] selected;
+    MudListItem selectedItem;
+    IEnumerable<string> searchTerms => selected == null
+        ? new string[] { }
+        : selected.Select(c => c.Text);
 
     protected override async Task OnInitializedAsync()
     {
         model = await _getModel;
+        Console.WriteLine(model);
+        StateHasChanged();
     }
+
+    string getSectionName(Comment.Sections section) => section switch
+    {
+        Comment.Sections.ThinkAbout => "Think about...",
+        Comment.Sections.GreatJob => "Great job...",
+        _ => section.ToString()
+    };
 }
