@@ -36,7 +36,6 @@ var areas = lines
     {
       "id": "<#= Guid.NewGuid().ToString() #>",
       "name": "<#=areas[i].area #>",
-      "position": <#= i + 1 #>,
       "comments": [
 <# for (var j = 0; j < areas[i].comments.Count; j++)
     {
@@ -44,8 +43,7 @@ var areas = lines
         {
           "id": "<#= Guid.NewGuid().ToString() #>",
           "text": "<#=areas[i].comments[j].comment #>",
-          "section": "<#=areas[i].comments[j].section #>",
-          "position": <#= j + 1 #>
+          "section": "<#=areas[i].comments[j].section #>"
         }<#= (j == areas[i].comments.Count - 1 ? "" : ",") #>
 <# } #>
       ]

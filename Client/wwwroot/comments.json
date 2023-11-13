@@ -1,203 +1,220 @@
 {
   "areas": [
     {
-      "id": "bbe0d91b-d2de-44ce-a17f-370758949285",
+      "id": "fef9e7f8-9bed-40f0-ab1d-365125f6a261",
       "name": "Core Values",
-      "position": 1,
       "comments": [
         {
-          "id": "dbd2a86f-2ff9-4bce-befe-9e606be2d9c7",
+          "id": "303b0663-c0ad-42a5-9ad2-507a46a3eb60",
           "text": "Good description of applying Core Values as participants in sports",
-          "section": "GreatJob",
-          "position": 1
+          "section": "GreatJob"
         },
         {
-          "id": "b2e8e1d8-074c-44d0-987f-00128e47a0c5",
+          "id": "dac069f1-3719-473f-bfc7-087d38117ed9",
           "text": "Great division of roles - effective use of each other's strengths",
-          "section": "GreatJob",
-          "position": 2
+          "section": "GreatJob"
         },
         {
-          "id": "c5f08967-04ca-488f-b9aa-9cdd782aa8f4",
+          "id": "1a755893-c491-4efa-a621-95a224787d1a",
           "text": "The team notebook to capture progress toward goals shows good planning",
-          "section": "GreatJob",
-          "position": 3
+          "section": "GreatJob"
         },
         {
-          "id": "eb5df4d8-33a6-46a8-9173-81593a674bd5",
+          "id": "4f93c924-c56c-4753-871c-20c37a239533",
           "text": "The team was good about acknowledging ideas from every one",
-          "section": "GreatJob",
-          "position": 4
+          "section": "GreatJob"
         },
         {
-          "id": "d909861e-793d-4e8a-bffd-584dfa0d8550",
+          "id": "655a5411-8ef8-458a-9698-54808f6fc027",
           "text": "The use of rotating buddy pairs to do both robot and project work shows good Coopertition",
-          "section": "GreatJob",
-          "position": 5
+          "section": "GreatJob"
         },
         {
-          "id": "7f28f9e7-b4b7-4d97-87e2-d6b69dca18c7",
+          "id": "01dcf938-882e-4a30-be56-ccf90e29be04",
           "text": "We liked how you showed us your team meeting agenda including activities for all four aspects of the challenge",
-          "section": "GreatJob",
-          "position": 6
+          "section": "GreatJob"
         },
         {
-          "id": "9368b2e9-4600-4c4d-94f9-e21534a625d5",
+          "id": "a93aa8d7-cfdd-45c2-8e69-dd3c13fccd8f",
           "text": "Your slogan of 'Coaches guide, Kids decide' reflects kids doing the work",
-          "section": "GreatJob",
-          "position": 7
+          "section": "GreatJob"
         },
         {
-          "id": "ffb31b9f-ab5b-45c8-b400-48d12aab3f8a",
+          "id": "3510d3e5-aaca-46e3-bf89-4dd5f8c4f618",
           "text": "Consider expressing how the team explored new skills and ideas",
-          "section": "ThinkAbout",
-          "position": 8
+          "section": "ThinkAbout"
         },
         {
-          "id": "d4895c0f-8b2c-40e8-bacc-57ab59a82a37",
+          "id": "20e48005-579e-4b71-b2e0-873638bf7cd1",
           "text": "Consider expressing how the team used creativity and persistence to solve problems",
-          "section": "ThinkAbout",
-          "position": 9
+          "section": "ThinkAbout"
         },
         {
-          "id": "e1a1532d-5f8d-4859-a3e5-5a07b57c3d73",
+          "id": "383dca54-e012-4732-a67d-53f3cac2fbac",
           "text": "Consider expressing how the team applied what they learned to improve their world",
-          "section": "ThinkAbout",
-          "position": 10
+          "section": "ThinkAbout"
         },
         {
-          "id": "b8e7d5dc-4ac6-438d-a142-a46188f40903",
+          "id": "05eb8327-6580-4254-9ffa-3354e918ef55",
           "text": "Consider expressing how the team demonstrated respect and embraced their differences",
-          "section": "ThinkAbout",
-          "position": 11
+          "section": "ThinkAbout"
         },
         {
-          "id": "7569ecb3-c074-4618-808b-6a263d1d4d23",
+          "id": "6562e64c-ccdd-42cd-a242-e3791bf12f92",
           "text": "Consider expressing how the team clearly showed they had worked as a team throughout their journey",
-          "section": "ThinkAbout",
-          "position": 12
+          "section": "ThinkAbout"
         },
         {
-          "id": "88a14e4e-4438-4c72-b88d-70da80f49f25",
+          "id": "1b731650-5367-4cbf-8c15-6feb4abc73fe",
           "text": "Consider expressing how the team clearly had fun and celebrated what they have achieved - as individuals and a group",
-          "section": "ThinkAbout",
-          "position": 13
+          "section": "ThinkAbout"
         }
       ]
     },
     {
-      "id": "795600af-4db7-4fde-9063-81382ddc5f92",
+      "id": "0b415ca3-85d9-4ca2-b82b-568b4ac34902",
       "name": "Innovation Project",
-      "position": 2,
       "comments": [
         {
-          "id": "41d9d299-00df-420a-8ca7-465e09398cfa",
+          "id": "8863b148-8c47-4059-a7db-9e59f70a64e0",
           "text": "We loved the way you talked to the expert about __ and then used their feedback to improve your ideas",
-          "section": "GreatJob",
-          "position": 1
+          "section": "GreatJob"
         },
         {
-          "id": "c35c30e7-c767-4c8c-bb51-0fcf9798531b",
+          "id": "93986237-ea58-42eb-a2cd-2b827e419636",
+          "text": "Consider expressing a clear definition of the problem",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "74cccdb2-6bed-45a3-b2d3-0f73a74915b1",
+          "text": "Consider expressing clear and detailed research from a variety of sources",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "f97da5b6-06b7-47d6-b1e2-7b27d3feaf9a",
           "text": "Consider engaging additional experts in your research",
-          "section": "ThinkAbout",
-          "position": 2
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "3a6a18a4-8c25-42f5-b89a-7ef8493e7153",
+          "text": "Consider expressing clear evidence of an inclusive selection process",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "673efe84-f85b-4895-8088-9f3749bb9847",
+          "text": "Consider expressing clear evidence of an effective plan",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "21de5ed8-21f3-46c4-a87c-884dfc551fab",
+          "text": "Consider expressing clearly how the team developed an innovative solution",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "64ecb487-74bd-4ea9-a662-cd511f512b41",
+          "text": "Consider expressing a detailed model or drawing that helps to share the solution",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "69ea3d3d-b710-470f-b66e-b5ddbb94cf9a",
+          "text": "Consider expressing how the team shared their solution with users and professionals",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "2a0b78a0-fc36-43ef-9803-9d019c6713d6",
+          "text": "Consider expressing clear evidence of improvements in your solution",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "b15a81e3-60a3-4d45-b354-8ed957c89de0",
+          "text": "Make your presentation more engaging by ___",
+          "section": "ThinkAbout"
+        },
+        {
+          "id": "fdef5085-b13a-4576-819b-a001c6c6c0f3",
+          "text": "Consider expressing more clearly your solution and its potential impact on others",
+          "section": "ThinkAbout"
         }
       ]
     },
     {
-      "id": "c06b2df0-66e2-4983-997c-8eb64440b956",
+      "id": "00cf56f6-fabb-4e40-810a-fd2e749d49b4",
       "name": "Robot Design",
-      "position": 3,
       "comments": [
         {
-          "id": "d5c31b93-e3e6-4825-9058-012460d708fe",
+          "id": "5ec0e5ca-92ed-442f-8b90-29f10cfc70f4",
           "text": "Cohesive team strategy and goals",
-          "section": "GreatJob",
-          "position": 1
+          "section": "GreatJob"
         },
         {
-          "id": "70869a65-c2dc-4f83-8503-1c9d682a6c63",
+          "id": "4460898b-17b8-45bb-95bb-bba7bdf32f83",
           "text": "Like the use of comments",
-          "section": "GreatJob",
-          "position": 2
+          "section": "GreatJob"
         },
         {
-          "id": "7ab0c2b3-3254-4720-8c20-bda04db2d37b",
+          "id": "28e4048d-5e3a-49c7-bad2-892d0622af2a",
           "text": "Liked the reuse of attachments",
-          "section": "GreatJob",
-          "position": 3
+          "section": "GreatJob"
         },
         {
-          "id": "d426f044-af69-4797-aa9a-0cd82b5d3edb",
+          "id": "640a31e3-b06b-4bbb-84e2-37ccb4de7ba6",
           "text": "Love your use of sensors",
-          "section": "GreatJob",
-          "position": 4
+          "section": "GreatJob"
         },
         {
-          "id": "58f025dc-3eee-4d78-8d6a-c5c2f7aba12b",
+          "id": "30113b50-c78e-42c5-a8ee-59f28138c8d4",
           "text": "Strategy: Easy missions first, location, matrix points",
-          "section": "GreatJob",
-          "position": 5
+          "section": "GreatJob"
         },
         {
-          "id": "a3fb4641-cae6-454b-b876-afaf4af4c5c1",
+          "id": "4cf9f92b-221d-4fa2-9724-09f3c029925a",
           "text": "You have a good strategy",
-          "section": "GreatJob",
-          "position": 6
+          "section": "GreatJob"
         },
         {
-          "id": "4dd93ea3-6930-40bc-bf0b-ddde9e13f8b8",
+          "id": "091348ff-cca6-4afe-bae9-fa8e17d1d88a",
           "text": "Fantastic Robot",
-          "section": "GreatJob",
-          "position": 7
+          "section": "GreatJob"
         },
         {
-          "id": "c8b52e92-2736-4fcc-99a7-f2b682980bb1",
+          "id": "664aafce-cd1c-4efd-83f7-483561b1a111",
           "text": "Good use of basic design",
-          "section": "GreatJob",
-          "position": 8
+          "section": "GreatJob"
         },
         {
-          "id": "e1ff3711-8fbf-419a-9fe7-c051c14c192b",
+          "id": "250f2e1f-3d1f-4596-a513-64a17e8ca17b",
           "text": "We like your wire management",
-          "section": "GreatJob",
-          "position": 9
+          "section": "GreatJob"
         },
         {
-          "id": "28195042-5b70-42c9-818d-1c90d21d1e0e",
+          "id": "42bc569e-61f7-4129-847f-f6bec964cadb",
           "text": "Consider presenting a RDES",
-          "section": "ThinkAbout",
-          "position": 10
+          "section": "ThinkAbout"
         },
         {
-          "id": "650af042-529b-49a9-9663-acc7deef68df",
+          "id": "4a900ff8-3e2c-4ef5-a696-6c97de778153",
           "text": "Consider use of myblocks",
-          "section": "ThinkAbout",
-          "position": 11
+          "section": "ThinkAbout"
         },
         {
-          "id": "84a625c7-bd92-4dbb-ba99-2fd4a77cc3be",
+          "id": "f1949617-e23d-4f40-9156-4b8d211fc3be",
           "text": "Consider using EV3Lessons.com",
-          "section": "ThinkAbout",
-          "position": 12
+          "section": "ThinkAbout"
         },
         {
-          "id": "1f8430f8-4d0f-4d66-b664-5b71cfb69afd",
+          "id": "880739bf-60dc-4468-ab42-33b7b1898039",
           "text": "Consider using sensors",
-          "section": "ThinkAbout",
-          "position": 13
+          "section": "ThinkAbout"
         },
         {
-          "id": "45823f42-fa88-4123-8669-79a1a32a0a34",
+          "id": "476abcba-1c90-4433-9936-47f891e0465d",
           "text": "Consider use of a jig",
-          "section": "ThinkAbout",
-          "position": 14
+          "section": "ThinkAbout"
         },
         {
-          "id": "4f4cf866-a607-4af8-b518-25b4b41c9589",
+          "id": "f979ad0c-052b-4119-9992-fc75cec203a0",
           "text": "Review the challenge document",
-          "section": "ThinkAbout",
-          "position": 15
+          "section": "ThinkAbout"
         }
       ]
     }

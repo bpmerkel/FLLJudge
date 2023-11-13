@@ -41,9 +41,6 @@ public class Area
     [JsonPropertyName("name")]
     public required string Name { get; set; }
 
-    [JsonPropertyName("position")]
-    public int Position { get; set; }
-
     [JsonPropertyName("comments")]
     public List<Comment> Comments { get; set; }
 
@@ -61,9 +58,6 @@ public class Comment
 
     [JsonPropertyName("text")]
     public required string Text { get; set; }
-
-    [JsonPropertyName("position")]
-    public int Position { get; set; }
 
     [JsonPropertyName("section")]
     public Sections Section { get; set; }
