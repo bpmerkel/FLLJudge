@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 
 namespace BlazorApp.Client;
-// see https://stackoverflow.com/questions/58523617/blazor-client-side-webassembly-reading-a-json-file-on-startup-cs
+
 public class Model
 {
     [JsonPropertyName("areas")]
@@ -10,16 +10,17 @@ public class Model
 
     public async static Task<Model> GetModel(string baseAddress)
     {
-        Console.WriteLine($"getting model from {baseAddress}");
+        // Fetch the JSOPN file from the server
+        // see https://stackoverflow.com/questions/58523617/blazor-client-side-webassembly-reading-a-json-file-on-startup-cs
         using var httpClient = new HttpClient { BaseAddress = new Uri(baseAddress) };
         var model = await httpClient.GetFromJsonAsync<Model>("comments.json")
             .ConfigureAwait(false);
-        Console.WriteLine(model);
+
+        // derive the tags from frequent terms used in the comments
         foreach (var area in model.Areas)
         {
-            // set the tags from the text
             area.Tags = area.Comments
-                .SelectMany(c => c.Text.Split(" \t;.:,".ToCharArray()))
+                .SelectMany(c => c.Text.Split(" \t;.:,'".ToCharArray()))
                 .Where(w => w.Length > 4)
                 .Select(w => w.ToLower())
                 .GroupBy(w => w)
@@ -29,7 +30,6 @@ public class Model
                 .Select(g => g.Key)
                 .ToList();
         }
-        Console.WriteLine(model);
         return model;
     }
 }

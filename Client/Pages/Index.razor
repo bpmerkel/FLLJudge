@@ -1,102 +1,70 @@
 ﻿@page "/"
 @inject Task<Model> _getModel
+@inject IDialogService DialogService
 
 <PageTitle>FLL Judge Comments</PageTitle>
 
-@if (model != null)
-{
-    <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
-        <ChildContent>
-            @foreach (var area in model.Areas)
-            {
-                <MudTabPanel Text="@area.Name" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
-                    <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
-                        @foreach (var tag in area.Tags)
-                        {
-                            <MudChip Text="@tag" Variant="Variant.Text" Color="Color.Primary">@tag</MudChip>
-                        }
-                    </MudChipSet>
-                    <MudList Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
-                        @foreach (var section in area.Comments.GroupBy(c => c.Section).Select(g => new { section = g.Key, comments = g.ToList() }))
-                        {
-                            <MudListItem Expanded="true" InitiallyExpanded="true">
-                                <ChildContent>
-                                    <MudText Typo="Typo.h4">@getSectionName(section.section)</MudText>
-                                </ChildContent>
-                                <NestedList>
-                                    @foreach (var comment in section.comments)
-                                    {
-                                        <MudListItem>
-                                            <MudCheckBox @bind-Checked="comment.Selected" Dense="true" Color="@Color.Primary">
-                                                <MudHighlighter Class="mud-warning-text"
-                                                                Style="background-color:transparent;font-weight:bold"
-                                                                Text="@comment.Text"
-                                                                UntilNextBoundary="true"
-                                                                CaseSensitive="false"
-                                                                Markup="true"
-                                                                HighlightedTexts="@searchTerms" />
-                                            </MudCheckBox>
-                                        </MudListItem>
-                                    }
-                                </NestedList>
-                            </MudListItem>
-                        }
-                    </MudList>
-                </MudTabPanel>
-            }
-            <MudTabPanel Text="About" Icon="@Icons.Material.Filled.Help">
-                <MudPaper Class="pa-16 ma-2" Elevation="3">
-                    <MudText Typo="Typo.h4">FLL Judge Comments App</MudText>
-                    <MudText Typo="Typo.body1" GutterBottom="true">
-                        Although <i>FIRST</i> LEGO League judges have 10 minutes to deliberate and record their assessments on the rubrics,
-                        they often confess that 10 minutes isn't enough time to generate
-                        comments for the bottom of the rubric forms. This application is a
-                        solution for judges to view common comments, and use them as a template
-                        to transcribe to their rubric forms.
-                    </MudText>
-                    <MudText Typo="Typo.body1" GutterBottom="true">
-                        To use the application, follow these steps:
-                        <ol>
-                            <li>Launch the application in a modern browser, such as Chrome or Edge.</li>
-                            <li>
-                                The app should show four tabs at the top--the first three tabs are
-                                the judging areas of a <i>FIRST</i> LEGO League tournament.
-                                Choose the tab that represents the area of judging for which you need to write comments.
-                            </li>
-                            <li>
-                                A list of common comments is listed... scan the list to identify a comment you think resonates
-                                with the team you just observed.
-                            </li>
-                            <li>
-                                To help rapidly identify a comment, use the 'chips' at the top of the list to
-                                highlight comment terms that include the given term. Those chips are generated from frequent terms used in the comments.
-                            </li>
-                            <li>Optionally click (or press) on each comment you want to include... this will show a badge on the tab with the count of comments you identified.</li>
-                            <li>When it comes time to transcribe the comments to your rubric pages, simply reference the comments you selected.</li>
-                        </ol>
-                    </MudText>
-                    <MudText Typo="Typo.body1" GutterBottom="true">
-                        This FLL Judge Comment application was coded one weekend in November 2023 by
-                        Brady P. Merkel. Please send Brady a note if you have feedback at brady@botnefl.org.
-                        Brady is currently Head Referee of the Northeast Florida <i>FIRST</i> LEGO League Region; where he
-                        also served in other capacities since 2013, including Coach, Tournament Director, Event Coordinator,
-                        Robot Design Judge, and Judge Advisor.
-                    </MudText>
-                </MudPaper>
-            </MudTabPanel>
-        </ChildContent>
-        <Header>
+<MudLayout>
+    <MudMainContent Class="pt-0">
+        <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
+            <MudText Typo="Typo.h4">FLL Judge Comments App</MudText>
+            <MudSpacer />
             <MudTooltip Text="Clear all selections">
-                <MudIconButton Icon="@Icons.Material.Filled.ClearAll" OnClick="@DoReset" Color="Color.Error" />
+                <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ClearAll" OnClick="@DoReset" Color="Color.Error">Clear All</MudButton>
             </MudTooltip>
-        </Header>
-    </MudTabs>
-}
-else
-{
-    <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
-}
+            <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Help" Color="Color.Warning" @onclick="OpenWelcomeDialog">Welcome</MudButton>
+        </MudAppBar>
 
+        @if (model != null)
+        {
+            <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Secondary" ApplyEffectsToContainer="true" AlwaysShowScrollButtons="true">
+                <ChildContent>
+                    @foreach (var area in model.Areas)
+                    {
+                        <MudTabPanel Text="@area.Name" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
+                            <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
+                                @foreach (var tag in area.Tags)
+                                {
+                                    <MudChip Text="@tag" Variant="Variant.Text" Color="Color.Warning">@tag</MudChip>
+                                }
+                            </MudChipSet>
+                            <MudList Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
+                                @foreach (var section in area.Comments.GroupBy(c => c.Section).Select(g => new { section = g.Key, comments = g.ToList() }))
+                                {
+                                    <MudListItem Expanded="true" InitiallyExpanded="true">
+                                        <ChildContent>
+                                            <MudText Typo="Typo.h5" Color="Color.Secondary">@getSectionName(section.section)</MudText>
+                                        </ChildContent>
+                                        <NestedList>
+                                            @foreach (var comment in section.comments)
+                                            {
+                                                <MudListItem>
+                                                    <MudCheckBox @bind-Checked="comment.Selected" Dense="true" Color="@Color.Primary">
+                                                        <MudHighlighter Class="mud-warning-text"
+                                                                        Style="background-color:transparent;font-weight:bold;font-size:18pt"
+                                                                        Text="@comment.Text"
+                                                                        UntilNextBoundary="true"
+                                                                        CaseSensitive="false"
+                                                                        Markup="true"
+                                                                        HighlightedTexts="@searchTerms" />
+                                                    </MudCheckBox>
+                                                </MudListItem>
+                                            }
+                                        </NestedList>
+                                    </MudListItem>
+                                }
+                            </MudList>
+                        </MudTabPanel>
+                    }
+                </ChildContent>
+            </MudTabs>
+        }
+        else
+        {
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
+        }
+    </MudMainContent>
+</MudLayout>
 
 @code
 {
@@ -110,9 +78,26 @@ else
     protected override async Task OnInitializedAsync()
     {
         model = await _getModel;
-        Console.WriteLine(model);
         StateHasChanged();
     }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            OpenWelcomeDialog();
+        }
+        return base.OnAfterRenderAsync(firstRender);
+    }
+
+    private void OpenWelcomeDialog() => DialogService.Show<WelcomeDialog>("Welcome", new DialogOptions
+        {
+            CloseButton = true,
+            DisableBackdropClick = true,
+            NoHeader = false,
+            Position = DialogPosition.Center,
+            CloseOnEscapeKey = true
+        });
 
     string getSectionName(Comment.Sections section) => section switch
     {
