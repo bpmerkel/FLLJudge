@@ -38,7 +38,7 @@
                                 <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
                                     @foreach (var tag in area.Tags)
                                     {
-                                        <MudChip Text="@tag" Variant="Variant.Text" Color="Color.Warning">@tag</MudChip>
+                                        <MudChip Text="@tag.Text" Variant="Variant.Text" Color="Color.Warning">@tag.Text (@tag.Count)</MudChip>
                                     }
                                 </MudChipSet>
                             }
@@ -76,10 +76,6 @@
                 </ChildContent>
             </MudTabs>
         }
-        else
-        {
-            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
-        }
     </MudMainContent>
 </MudLayout>
 
@@ -110,6 +106,7 @@
 
     private void OpenWelcomeDialog() => DialogService.Show<WelcomeDialog>("Welcome", new DialogOptions
         {
+            MaxWidth = MaxWidth.Large,
             CloseButton = true,
             DisableBackdropClick = true,
             NoHeader = false,

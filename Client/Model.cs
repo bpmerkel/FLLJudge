@@ -24,10 +24,9 @@ public class Model
                 .Where(w => w.Length > 4)
                 .Select(w => w.ToLower())
                 .GroupBy(w => w)
-                .Select(g => new { g.Key, count = g.Count() })
-                .OrderByDescending(g => g.count)
+                .Select(g => new Tag { Text = g.Key, Count = g.Count() })
+                .OrderByDescending(t => t.Count)
                 .Take(15)
-                .Select(g => g.Key)
                 .ToList();
         }
         return model;
@@ -49,7 +48,7 @@ public class Area
     public List<Comment> Comments { get; set; }
 
     [JsonIgnore]
-    public List<string> Tags { get; set; }
+    public List<Tag> Tags { get; set; }
 }
 
 public class Comment
@@ -71,4 +70,13 @@ public class Comment
 
     [JsonIgnore]
     public bool Selected { get; set; }
+}
+
+public class Tag
+{
+    [JsonIgnore]
+    public required string Text { get; set; }
+
+    [JsonIgnore]
+    public int Count { get; set; }
 }

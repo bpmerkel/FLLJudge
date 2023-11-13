@@ -1,6 +1,8 @@
 ﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h4" Color="Color.Warning">FLL Judge Comments App</MudText>
+    </TitleContent>
     <DialogContent>
-        <MudText Typo="Typo.h4">FLL Judge Comments App</MudText>
         <MudText Typo="Typo.body1" GutterBottom="true">
             Although <i>FIRST</i> LEGO League judges have 10 minutes to deliberate
             and record their assessments on the rubrics, judges often confess that 10 minutes
@@ -10,7 +12,7 @@
         </MudText>
         <MudText Typo="Typo.body1" GutterBottom="true">
             To use the app, follow these steps:
-            <ol>
+            <ol class="indented">
                 <li>Launch the application in a modern browser, such as Chrome or Edge (the browser needs to support WebAssembly--a capability to run web apps).</li>
                 <li>
                     The app should show three tabs for the judging areas of a <i>FIRST</i> LEGO League tournament--'Core Values', 'Innovation Project', and 'Robot Design'.
@@ -39,7 +41,7 @@
         </MudText>
     </DialogContent>
     <DialogActions>
-        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+        <MudButton Color="Color.Warning" OnClick="Submit" Variant="Variant.Filled">Ok</MudButton>
     </DialogActions>
 </MudDialog>
 
