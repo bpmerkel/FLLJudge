@@ -6,28 +6,42 @@
 
 <MudLayout>
     <MudMainContent Class="pt-0">
-        <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
-            <MudText Typo="Typo.h4">FLL Judge Comments App</MudText>
-            <MudSpacer />
-            <MudTooltip Text="Clear all selections">
-                <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ClearAll" OnClick="@DoReset" Color="Color.Error">Clear All</MudButton>
-            </MudTooltip>
-            <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Help" Color="Color.Warning" @onclick="OpenWelcomeDialog">Welcome</MudButton>
-        </MudAppBar>
-
         @if (model != null)
         {
-            <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Secondary" ApplyEffectsToContainer="true" AlwaysShowScrollButtons="true">
+            <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
+                <MudText Typo="Typo.h4">FLL Judge Comments App</MudText>
+                <MudSpacer />
+                <MudTooltip Text="Show selections only">
+                    <MudCheckBox @bind-Checked="@FilterOn"
+                                 Disabled="@(!model.Areas.Any(a => a.Comments.Any(c => c.Selected)))"
+                                 Color="Color.Warning" UnCheckedColor="@Color.Success"
+                                 Dense="true"
+                                 CheckedIcon="@Icons.Material.Filled.FilterListOff"
+                                 UncheckedIcon="@Icons.Material.Filled.FilterList">
+                        <MudText Typo="Typo.body2" Inline="true">@(FilterOn ? "SHOW ALL" : "SHOW SELECTIONS")</MudText>
+                    </MudCheckBox>
+                </MudTooltip>
+                    <MudTooltip Text="Clear all selections">
+                        <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ClearAll" OnClick="@DoReset" Color="Color.Warning">Clear All</MudButton>
+                    </MudTooltip>
+                    <MudSpacer />
+                <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Help" Color="Color.Success" @onclick="OpenWelcomeDialog">Welcome</MudButton>
+            </MudAppBar>
+
+            <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Warning" ApplyEffectsToContainer="true" AlwaysShowScrollButtons="true">
                 <ChildContent>
                     @foreach (var area in model.Areas)
                     {
                         <MudTabPanel Text="@area.Name" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
-                            <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
-                                @foreach (var tag in area.Tags)
-                                {
-                                    <MudChip Text="@tag" Variant="Variant.Text" Color="Color.Warning">@tag</MudChip>
-                                }
-                            </MudChipSet>
+                            @if (!FilterOn)
+                            {
+                                <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
+                                    @foreach (var tag in area.Tags)
+                                    {
+                                        <MudChip Text="@tag" Variant="Variant.Text" Color="Color.Warning">@tag</MudChip>
+                                    }
+                                </MudChipSet>
+                            }
                             <MudList Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
                                 @foreach (var section in area.Comments.GroupBy(c => c.Section).Select(g => new { section = g.Key, comments = g.ToList() }))
                                 {
@@ -38,17 +52,20 @@
                                         <NestedList>
                                             @foreach (var comment in section.comments)
                                             {
-                                                <MudListItem>
-                                                    <MudCheckBox @bind-Checked="comment.Selected" Dense="true" Color="@Color.Primary">
-                                                        <MudHighlighter Class="mud-warning-text"
-                                                                        Style="background-color:transparent;font-weight:bold;font-size:18pt"
-                                                                        Text="@comment.Text"
-                                                                        UntilNextBoundary="true"
-                                                                        CaseSensitive="false"
-                                                                        Markup="true"
-                                                                        HighlightedTexts="@searchTerms" />
-                                                    </MudCheckBox>
-                                                </MudListItem>
+                                                @if (!FilterOn || (FilterOn && comment.Selected))
+                                                {
+                                                    <MudListItem>
+                                                        <MudCheckBox @bind-Checked="comment.Selected" Dense="true" Color="@Color.Primary">
+                                                            <MudHighlighter Class="mud-warning-text"
+                                                                            Style="background-color:transparent;font-weight:bold;font-size:18pt"
+                                                                            Text="@comment.Text"
+                                                                            UntilNextBoundary="true"
+                                                                            CaseSensitive="false"
+                                                                            Markup="true"
+                                                                            HighlightedTexts="@searchTerms" />
+                                                        </MudCheckBox>
+                                                    </MudListItem>
+                                                }
                                             }
                                         </NestedList>
                                     </MudListItem>
@@ -74,6 +91,7 @@
     IEnumerable<string> searchTerms => selected == null
         ? new string[] { }
         : selected.Select(c => c.Text);
+    bool FilterOn;
 
     protected override async Task OnInitializedAsync()
     {
@@ -116,6 +134,7 @@
 
         selected = new MudChip[] { };
         selectedItem = null;
+        FilterOn = false;
         StateHasChanged();
     }
 }
