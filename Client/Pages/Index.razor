@@ -9,7 +9,7 @@
         @if (model != null)
         {
             <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
-                <MudText Typo="Typo.h4">FLL Judge Comments App</MudText>
+                <MudText Class="d-none d-sm-flex" Typo="Typo.h4">FLL Judge Comments App</MudText>
                 <MudSpacer />
                 <MudTooltip Text="Show selections only">
                     <MudCheckBox @bind-Checked="@FilterOn"
@@ -21,11 +21,11 @@
                         <MudText Typo="Typo.body2" Inline="true">@(FilterOn ? "SHOW ALL" : "SHOW SELECTIONS")</MudText>
                     </MudCheckBox>
                 </MudTooltip>
-                    <MudTooltip Text="Clear all selections">
-                        <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ClearAll" OnClick="@DoReset" Color="Color.Warning">Clear All</MudButton>
-                    </MudTooltip>
-                    <MudSpacer />
-                <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Help" Color="Color.Success" @onclick="OpenWelcomeDialog">Welcome</MudButton>
+                <MudTooltip Text="Clear all selections">
+                    <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ClearAll" OnClick="@DoReset" Color="Color.Warning">Clear All</MudButton>
+                </MudTooltip>
+                <MudSpacer />
+                <MudButton Class="d-none d-sm-flex" Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Help" Color="Color.Success" @onclick="OpenWelcomeDialog">Welcome</MudButton>
             </MudAppBar>
 
             <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Warning" ApplyEffectsToContainer="true" AlwaysShowScrollButtons="true">
@@ -50,8 +50,8 @@
                                             <MudText Typo="Typo.h5" Color="Color.Secondary">@getSectionName(section.section)</MudText>
                                         </ChildContent>
                                         <NestedList>
-                                            @foreach (var comment in section.comments)
-                                            {
+                                        @foreach (var comment in section.comments)
+                                        {
                                                 @if (!FilterOn || (FilterOn && comment.Selected))
                                                 {
                                                     <MudListItem>
