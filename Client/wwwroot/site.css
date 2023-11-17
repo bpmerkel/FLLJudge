@@ -3,3 +3,8 @@
         display: none;
     }
 }
+.highlighted {
+    background-color: transparent;
+    font-weight: bold;
+    color: var(--mud-palette-warning) !important;
+}
