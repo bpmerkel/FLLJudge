@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using MudBlazor.Services
+@implements IBrowserViewportObserver
+@implements IAsyncDisposable
 @inject Task<Model> _getModel
 @inject IDialogService DialogService
 
@@ -9,11 +12,12 @@
         @if (model != null)
         {
             <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">
-                <MudHidden Breakpoint="Breakpoint.Md">
+                @if (!IsSmallScreen)
+                {
                     <MudText Typo="Typo.h4">FLL Judge Comments App</MudText>
                     <MudSpacer />
-                </MudHidden>
- 
+                }
+
                 <MudTooltip Text="Show selections only">
                     <MudCheckBox @bind-Checked="@FilterOn"
                                  Disabled="@(!model.Areas.Any(a => a.Comments.Any(c => c.Selected)))"
@@ -30,19 +34,20 @@
                 </MudTooltip>
 
                 <MudCheckBox @bind-Checked="fontSize"
-                    Dense="true" Color="@Color.Secondary" TriState="true"
-                    CheckedIcon="@Icons.Material.Filled.FormatSize"
-                    IndeterminateIcon="@Icons.Material.Filled.FormatSize"
-                    UncheckedIcon="@Icons.Material.Filled.FormatSize"
-                    Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)" />
+                             Dense="true" Color="@Color.Secondary" TriState="true"
+                             CheckedIcon="@Icons.Material.Filled.FormatSize"
+                             IndeterminateIcon="@Icons.Material.Filled.FormatSize"
+                             UncheckedIcon="@Icons.Material.Filled.FormatSize"
+                             Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)" />
 
-                <MudHidden Breakpoint="Breakpoint.Md">
+                @if (!IsSmallScreen)
+                {
                     <MudSpacer />
                     <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Help" Color="Color.Success" @onclick="OpenWelcomeDialog">Welcome</MudButton>
-                </MudHidden>
+                }
             </MudAppBar>
 
-            <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Warning" ApplyEffectsToContainer="true" AlwaysShowScrollButtons="true">
+            <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Warning" ApplyEffectsToContainer="true" AlwaysShowScrollButtons="true" MinimumTabWidth="90">
                 <ChildContent>
                     @foreach (var area in model.Areas)
                     {
@@ -62,9 +67,9 @@
                                     <MudListItem Expanded="true" InitiallyExpanded="true">
                                         <ChildContent>
                                             <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@getSectionName(section.section)</MudText>
-                                        </ChildContent>
-                                        <NestedList>
-                                            @foreach (var comment in section.comments)
+                                            </ChildContent>
+                                            <NestedList>
+                                                @foreach (var comment in section.comments)
                                             {
                                                 @if (!FilterOn || (FilterOn && comment.Selected))
                                                 {
@@ -72,11 +77,11 @@
                                                         <MudCheckBox @bind-Checked="comment.Selected" Dense="true" Color="@Color.Primary">
                                                             <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
                                                                 <MudHighlighter Text="@comment.Text"
-                                                                    Class="highlighted"
-                                                                    UntilNextBoundary="true"
-                                                                    CaseSensitive="false"
-                                                                    Markup="true"
-                                                                    HighlightedTexts="@searchTerms" />
+                                                                                Class="highlighted"
+                                                                                UntilNextBoundary="true"
+                                                                                CaseSensitive="false"
+                                                                                Markup="true"
+                                                                                HighlightedTexts="@searchTerms" />
                                                             </MudText>
                                                         </MudCheckBox>
                                                     </MudListItem>
@@ -96,6 +101,8 @@
 
 @code
 {
+    [Inject]
+    private IBrowserViewportService BrowserViewportService { get; set; }
     bool? fontSize = true; // tri-state; fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium
     Model model;
     bool FilterOn;
@@ -104,6 +111,9 @@
     IEnumerable<string> searchTerms => selected == null
         ? new string[] { }
         : selected.Select(c => c.Text);
+    int _width = 0;
+    int _height = 0;
+    bool IsSmallScreen => _width < 900;
 
     protected override async Task OnInitializedAsync()
     {
@@ -111,13 +121,14 @@
         StateHasChanged();
     }
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            await BrowserViewportService.SubscribeAsync(this, fireImmediately: true);
             OpenWelcomeDialog();
         }
-        return base.OnAfterRenderAsync(firstRender);
+        await base.OnAfterRenderAsync(firstRender);
     }
 
     private void OpenWelcomeDialog() => DialogService.Show<WelcomeDialog>("Welcome", new DialogOptions
@@ -137,7 +148,20 @@
         _ => section.ToString()
     };
 
-    string getAreaName(string Name) => Name;
+    string getAreaName(string Name)
+    {
+        if (IsSmallScreen)
+        {
+            return Name switch
+            {
+                "Core Values" => "CV",
+                "Innovation Project" => "IP",
+                "Robot Design" => "RD",
+                _ => Name
+            };
+        }
+        return Name;
+    }
 
     void DoReset(MouseEventArgs e)
     {
@@ -152,4 +176,21 @@
         FilterOn = false;
         StateHasChanged();
     }
+
+    Guid IBrowserViewportObserver.Id { get; } = Guid.NewGuid();
+
+    ResizeOptions IBrowserViewportObserver.ResizeOptions { get; } = new()
+        {
+            ReportRate = 1000,
+            NotifyOnBreakpointOnly = false
+        };
+
+    Task IBrowserViewportObserver.NotifyBrowserViewportChangeAsync(BrowserViewportEventArgs browserViewportEventArgs)
+    {
+        _width = browserViewportEventArgs.BrowserWindowSize.Width;
+        _height = browserViewportEventArgs.BrowserWindowSize.Height;
+        return InvokeAsync(StateHasChanged);
+    }
+
+    public async ValueTask DisposeAsync() => await BrowserViewportService.UnsubscribeAsync(this);
 }
