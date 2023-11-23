@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using System.Net.Http.Json;
 
-namespace BlazorApp.Client;
+namespace FLLJudge.Client;
 
 public class Model
 {
