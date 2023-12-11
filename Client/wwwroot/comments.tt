@@ -34,14 +34,14 @@ var areas = lines
     {
 #>
     {
-      "id": "<#= Guid.NewGuid().ToString() #>",
+      "areaid": "<#= Guid.NewGuid().ToString() #>",
       "name": "<#=areas[i].area #>",
       "comments": [
 <# for (var j = 0; j < areas[i].comments.Count; j++)
     {
 #>
         {
-          "id": "<#= Guid.NewGuid().ToString() #>",
+          "commentid": "<#= Guid.NewGuid().ToString() #>",
           "text": "<#=areas[i].comments[j].comment #>",
           "section": "<#=areas[i].comments[j].section #>"
         }<#= (j == areas[i].comments.Count - 1 ? "" : ",") #>

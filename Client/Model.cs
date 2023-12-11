@@ -35,7 +35,7 @@ public class Model
 
 public class Area
 {
-    [JsonPropertyName("id")]
+    [JsonPropertyName("areaid")]
     public required string Id { get; set; }
 
     [JsonPropertyName("name")]
@@ -53,7 +53,7 @@ public class Comment
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Sections { GreatJob, ThinkAbout }
 
-    [JsonPropertyName("id")]
+    [JsonPropertyName("commentid")]
     public required string Id { get; set; }
 
     [JsonPropertyName("text")]

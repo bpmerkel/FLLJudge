@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlazorApp.Shared
+namespace FLLJudge.Shared
 {
     public class CommentData
     {

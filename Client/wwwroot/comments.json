@@ -1,218 +1,218 @@
 {
   "areas": [
     {
-      "id": "fef9e7f8-9bed-40f0-ab1d-365125f6a261",
+      "areaid": "7e6b7119-bcba-417b-baeb-6033c867d03a",
       "name": "Core Values",
       "comments": [
         {
-          "id": "303b0663-c0ad-42a5-9ad2-507a46a3eb60",
+          "commentid": "8c879446-c86c-491c-885e-95f775a3e63a",
           "text": "Good description of applying Core Values as participants in sports",
           "section": "GreatJob"
         },
         {
-          "id": "dac069f1-3719-473f-bfc7-087d38117ed9",
+          "commentid": "7004002b-d883-4b81-bef5-8bc5380c617a",
           "text": "Great division of roles - effective use of each other's strengths",
           "section": "GreatJob"
         },
         {
-          "id": "1a755893-c491-4efa-a621-95a224787d1a",
+          "commentid": "990745ed-97d6-4d5f-baf7-04ab6b3696f4",
           "text": "The team notebook to capture progress toward goals shows good planning",
           "section": "GreatJob"
         },
         {
-          "id": "4f93c924-c56c-4753-871c-20c37a239533",
+          "commentid": "13f4a9ba-8ddb-4aa3-97ce-379cc1bc1c6c",
           "text": "The team was good about acknowledging ideas from every one",
           "section": "GreatJob"
         },
         {
-          "id": "655a5411-8ef8-458a-9698-54808f6fc027",
+          "commentid": "92268e69-fa12-4786-a183-515351779199",
           "text": "The use of rotating buddy pairs to do both robot and project work shows good Coopertition",
           "section": "GreatJob"
         },
         {
-          "id": "01dcf938-882e-4a30-be56-ccf90e29be04",
+          "commentid": "c18f4569-4a93-4031-bcab-5d893ba0cbdc",
           "text": "We liked how you showed us your team meeting agenda including activities for all four aspects of the challenge",
           "section": "GreatJob"
         },
         {
-          "id": "a93aa8d7-cfdd-45c2-8e69-dd3c13fccd8f",
+          "commentid": "15c9dcc4-c8e9-4d20-8fe2-2544531bc654",
           "text": "Your slogan of 'Coaches guide, Kids decide' reflects kids doing the work",
           "section": "GreatJob"
         },
         {
-          "id": "3510d3e5-aaca-46e3-bf89-4dd5f8c4f618",
+          "commentid": "e4c7753d-444b-4cca-af8d-46a7123695ca",
           "text": "Consider expressing how the team explored new skills and ideas",
           "section": "ThinkAbout"
         },
         {
-          "id": "20e48005-579e-4b71-b2e0-873638bf7cd1",
+          "commentid": "fd681041-1188-47b6-b886-60017e715060",
           "text": "Consider expressing how the team used creativity and persistence to solve problems",
           "section": "ThinkAbout"
         },
         {
-          "id": "383dca54-e012-4732-a67d-53f3cac2fbac",
+          "commentid": "b2948fb4-08a6-4eb3-87a9-dfd9aa53d1e3",
           "text": "Consider expressing how the team applied what they learned to improve their world",
           "section": "ThinkAbout"
         },
         {
-          "id": "05eb8327-6580-4254-9ffa-3354e918ef55",
+          "commentid": "7f8beb6a-d21d-4833-a6d7-34afa733a0c8",
           "text": "Consider expressing how the team demonstrated respect and embraced their differences",
           "section": "ThinkAbout"
         },
         {
-          "id": "6562e64c-ccdd-42cd-a242-e3791bf12f92",
+          "commentid": "73fbd2fa-9879-44b6-a2eb-2f6e79a18e93",
           "text": "Consider expressing how the team clearly showed they had worked as a team throughout their journey",
           "section": "ThinkAbout"
         },
         {
-          "id": "1b731650-5367-4cbf-8c15-6feb4abc73fe",
+          "commentid": "a4cbea00-f233-47bd-a740-c9538a584643",
           "text": "Consider expressing how the team clearly had fun and celebrated what they have achieved - as individuals and a group",
           "section": "ThinkAbout"
         }
       ]
     },
     {
-      "id": "0b415ca3-85d9-4ca2-b82b-568b4ac34902",
+      "areaid": "02f27c26-7b66-4e0c-899e-ffeb1b8f47ee",
       "name": "Innovation Project",
       "comments": [
         {
-          "id": "8863b148-8c47-4059-a7db-9e59f70a64e0",
+          "commentid": "ca1fa88a-cc11-4af0-9c2b-fa673626e4bc",
           "text": "We loved the way you talked to the expert about __ and then used their feedback to improve your ideas",
           "section": "GreatJob"
         },
         {
-          "id": "93986237-ea58-42eb-a2cd-2b827e419636",
+          "commentid": "30ef815f-d746-4543-9dd2-aa66170335e9",
           "text": "Consider expressing a clear definition of the problem",
           "section": "ThinkAbout"
         },
         {
-          "id": "74cccdb2-6bed-45a3-b2d3-0f73a74915b1",
+          "commentid": "542f626c-f707-4feb-9e76-afa64167e39b",
           "text": "Consider expressing clear and detailed research from a variety of sources",
           "section": "ThinkAbout"
         },
         {
-          "id": "f97da5b6-06b7-47d6-b1e2-7b27d3feaf9a",
+          "commentid": "90f84452-3321-4f89-acd1-7ba2d7db88ae",
           "text": "Consider engaging additional experts in your research",
           "section": "ThinkAbout"
         },
         {
-          "id": "3a6a18a4-8c25-42f5-b89a-7ef8493e7153",
+          "commentid": "ff2e586a-03c6-4efc-ab44-a1886e196ad4",
           "text": "Consider expressing clear evidence of an inclusive selection process",
           "section": "ThinkAbout"
         },
         {
-          "id": "673efe84-f85b-4895-8088-9f3749bb9847",
+          "commentid": "977946ac-90e1-4b49-9c2e-5ccb577c2609",
           "text": "Consider expressing clear evidence of an effective plan",
           "section": "ThinkAbout"
         },
         {
-          "id": "21de5ed8-21f3-46c4-a87c-884dfc551fab",
+          "commentid": "cb65b489-17e2-401a-8ecb-232aa6c74d14",
           "text": "Consider expressing clearly how the team developed an innovative solution",
           "section": "ThinkAbout"
         },
         {
-          "id": "64ecb487-74bd-4ea9-a662-cd511f512b41",
+          "commentid": "ced0484b-4c25-46ac-b9ba-b2df2a498b6d",
           "text": "Consider expressing a detailed model or drawing that helps to share the solution",
           "section": "ThinkAbout"
         },
         {
-          "id": "69ea3d3d-b710-470f-b66e-b5ddbb94cf9a",
+          "commentid": "42adc995-6db5-4383-a4a3-760cb4d79b93",
           "text": "Consider expressing how the team shared their solution with users and professionals",
           "section": "ThinkAbout"
         },
         {
-          "id": "2a0b78a0-fc36-43ef-9803-9d019c6713d6",
+          "commentid": "caf6fd2e-6e74-467c-ada6-cfcf5cbd382e",
           "text": "Consider expressing clear evidence of improvements in your solution",
           "section": "ThinkAbout"
         },
         {
-          "id": "b15a81e3-60a3-4d45-b354-8ed957c89de0",
+          "commentid": "ecff4174-ae79-451c-b554-5497aecf533c",
           "text": "Make your presentation more engaging by ___",
           "section": "ThinkAbout"
         },
         {
-          "id": "fdef5085-b13a-4576-819b-a001c6c6c0f3",
+          "commentid": "5441a8ce-dd37-4f1a-b01d-6175ecd3efd8",
           "text": "Consider expressing more clearly your solution and its potential impact on others",
           "section": "ThinkAbout"
         }
       ]
     },
     {
-      "id": "00cf56f6-fabb-4e40-810a-fd2e749d49b4",
+      "areaid": "bddd7845-614a-44eb-adda-a87d5f9dc582",
       "name": "Robot Design",
       "comments": [
         {
-          "id": "5ec0e5ca-92ed-442f-8b90-29f10cfc70f4",
+          "commentid": "bf2f8814-fa56-4752-a0b8-46fe59faf39a",
           "text": "Cohesive team strategy and goals",
           "section": "GreatJob"
         },
         {
-          "id": "4460898b-17b8-45bb-95bb-bba7bdf32f83",
+          "commentid": "868c9e7c-4748-41d6-97e2-440566e465cc",
           "text": "Like the use of comments",
           "section": "GreatJob"
         },
         {
-          "id": "28e4048d-5e3a-49c7-bad2-892d0622af2a",
+          "commentid": "b5411ea6-0971-4d29-b6d3-a13bd4ed5862",
           "text": "Liked the reuse of attachments",
           "section": "GreatJob"
         },
         {
-          "id": "640a31e3-b06b-4bbb-84e2-37ccb4de7ba6",
+          "commentid": "6003a52a-a989-48c6-8dd3-3d6fdb12214a",
           "text": "Love your use of sensors",
           "section": "GreatJob"
         },
         {
-          "id": "30113b50-c78e-42c5-a8ee-59f28138c8d4",
+          "commentid": "ba4001ec-23eb-4283-84a4-ff5a0151c992",
           "text": "Strategy: Easy missions first, location, matrix points",
           "section": "GreatJob"
         },
         {
-          "id": "4cf9f92b-221d-4fa2-9724-09f3c029925a",
+          "commentid": "412875db-8dce-45f2-bb48-90edb1592039",
           "text": "You have a good strategy",
           "section": "GreatJob"
         },
         {
-          "id": "091348ff-cca6-4afe-bae9-fa8e17d1d88a",
+          "commentid": "6c9207b9-d75f-48cb-93ec-0325cd26be02",
           "text": "Fantastic Robot",
           "section": "GreatJob"
         },
         {
-          "id": "664aafce-cd1c-4efd-83f7-483561b1a111",
+          "commentid": "d1c145f4-01e2-4b40-8a02-eec88369de90",
           "text": "Good use of basic design",
           "section": "GreatJob"
         },
         {
-          "id": "250f2e1f-3d1f-4596-a513-64a17e8ca17b",
+          "commentid": "498001ce-51bb-4f66-bca7-0ad695ceaed0",
           "text": "We like your wire management",
           "section": "GreatJob"
         },
         {
-          "id": "42bc569e-61f7-4129-847f-f6bec964cadb",
+          "commentid": "7e005c00-ba4c-4eed-bfa7-77baca5622ba",
           "text": "Consider presenting a RDES",
           "section": "ThinkAbout"
         },
         {
-          "id": "4a900ff8-3e2c-4ef5-a696-6c97de778153",
+          "commentid": "051b60bd-5964-4620-b7b4-30708bd79b8a",
           "text": "Consider use of myblocks",
           "section": "ThinkAbout"
         },
         {
-          "id": "f1949617-e23d-4f40-9156-4b8d211fc3be",
+          "commentid": "1e6f1514-f4d3-40bd-81c2-1a4d136cd505",
           "text": "Consider using EV3Lessons.com",
           "section": "ThinkAbout"
         },
         {
-          "id": "880739bf-60dc-4468-ab42-33b7b1898039",
+          "commentid": "41ec1f4d-1225-41c7-920a-9a070c1bbdf7",
           "text": "Consider using sensors",
           "section": "ThinkAbout"
         },
         {
-          "id": "476abcba-1c90-4433-9936-47f891e0465d",
+          "commentid": "9259ac1c-11f4-4b06-8557-5fb3bce179a5",
           "text": "Consider use of a jig",
           "section": "ThinkAbout"
         },
         {
-          "id": "f979ad0c-052b-4119-9992-fc75cec203a0",
+          "commentid": "21cb65ae-9dd1-4819-815f-0a5c9b3ff39f",
           "text": "Review the challenge document",
           "section": "ThinkAbout"
         }
