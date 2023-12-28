@@ -1,9 +1,6 @@
 ﻿@page "/"
-@using MudBlazor.Services
 @implements IBrowserViewportObserver
 @implements IAsyncDisposable
-@inject Task<Model> _getModel
-@inject IDialogService DialogService
 
 <PageTitle>FLL Judge Comments</PageTitle>
 
@@ -19,7 +16,7 @@
                 }
 
                 <MudTooltip Text="Show selections only">
-                    <MudCheckBox @bind-Checked="@FilterOn"
+                    <MudCheckBox @bind-Value="FilterOn"
                                  Disabled="@(!model.Areas.Any(a => a.Comments.Any(c => c.Selected)))"
                                  Color="Color.Warning" UnCheckedColor="@Color.Success"
                                  Dense="true"
@@ -33,7 +30,7 @@
                     <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ClearAll" OnClick="@DoReset" Color="Color.Warning">Clear All</MudButton>
                 </MudTooltip>
 
-                <MudCheckBox @bind-Checked="fontSize"
+                <MudCheckBox @bind-Value="fontSize"
                              Dense="true" Color="@Color.Secondary" TriState="true"
                              CheckedIcon="@Icons.Material.Filled.FormatSize"
                              IndeterminateIcon="@Icons.Material.Filled.FormatSize"
@@ -51,7 +48,7 @@
                 <ChildContent>
                     @foreach (var area in model.Areas)
                     {
-                        <MudTabPanel Text="@getAreaName(area.Name)" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
+                        <MudTabPanel Text="@GetAreaName(area.Name)" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
                             @if (!FilterOn)
                             {
                                 <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
@@ -66,7 +63,7 @@
                                 {
                                     <MudListItem Expanded="true" InitiallyExpanded="true">
                                         <ChildContent>
-                                            <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@getSectionName(section.section)</MudText>
+                                            <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@GetSectionName(section.section)</MudText>
                                             </ChildContent>
                                             <NestedList>
                                                 @foreach (var comment in section.comments)
@@ -74,14 +71,14 @@
                                                     if (!FilterOn || (FilterOn && comment.Selected))
                                                     {
                                                         <MudListItem>
-                                                            <MudCheckBox @bind-Checked="comment.Selected" Dense="true" Color="@Color.Primary">
+                                                        <MudCheckBox @bind-Value="comment.Selected" Dense="true" Color="@Color.Primary">
                                                                 <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
                                                                     <MudHighlighter Text="@comment.Text"
                                                                                 Class="highlighted"
                                                                                 UntilNextBoundary="true"
                                                                                 CaseSensitive="false"
                                                                                 Markup="true"
-                                                                                HighlightedTexts="@searchTerms" />
+                                                                                HighlightedTexts="@SearchTerms" />
                                                                 </MudText>
                                                             </MudCheckBox>
                                                         </MudListItem>
@@ -98,99 +95,3 @@
         }
     </MudMainContent>
 </MudLayout>
-
-@code
-{
-    [Inject]
-    private IBrowserViewportService BrowserViewportService { get; set; }
-    bool? fontSize = true; // tri-state; fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium
-    Model model;
-    bool FilterOn;
-    MudChip[] selected;
-    MudListItem selectedItem;
-    IEnumerable<string> searchTerms => selected == null
-        ? new string[] { }
-        : selected.Select(c => c.Text);
-    int _width = 0;
-    int _height = 0;
-    bool IsSmallScreen => _width < 900;
-
-    protected override async Task OnInitializedAsync()
-    {
-        model = await _getModel;
-        StateHasChanged();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await BrowserViewportService.SubscribeAsync(this, fireImmediately: true);
-            OpenWelcomeDialog();
-        }
-        await base.OnAfterRenderAsync(firstRender);
-    }
-
-    private void OpenWelcomeDialog() => DialogService.Show<WelcomeDialog>("Welcome", new DialogOptions
-        {
-            MaxWidth = MaxWidth.Large,
-            CloseButton = true,
-            DisableBackdropClick = true,
-            NoHeader = false,
-            Position = DialogPosition.Center,
-            CloseOnEscapeKey = true
-        });
-
-    string getSectionName(Comment.Sections section) => section switch
-    {
-        Comment.Sections.ThinkAbout => "Think about...",
-        Comment.Sections.GreatJob => "Great job...",
-        _ => section.ToString()
-    };
-
-    string getAreaName(string Name)
-    {
-        if (IsSmallScreen)
-        {
-            return Name switch
-            {
-                "Core Values" => "CV",
-                "Innovation Project" => "IP",
-                "Robot Design" => "RD",
-                _ => Name
-            };
-        }
-        return Name;
-    }
-
-    void DoReset(MouseEventArgs e)
-    {
-        // perform a reset by clearing all selected comments and unchecking chips
-        model.Areas.ForEach(a =>
-        {
-            a.Comments.ForEach(c => c.Selected = false);
-        });
-
-        selected = new MudChip[] { };
-        selectedItem = null;
-        FilterOn = false;
-        StateHasChanged();
-    }
-
-    Guid IBrowserViewportObserver.Id { get; } = Guid.NewGuid();
-
-    ResizeOptions IBrowserViewportObserver.ResizeOptions { get; } = new()
-        {
-            ReportRate = 1000,
-            NotifyOnBreakpointOnly = false
-        };
-
-    Task IBrowserViewportObserver.NotifyBrowserViewportChangeAsync(BrowserViewportEventArgs browserViewportEventArgs)
-    {
-        _width = browserViewportEventArgs.BrowserWindowSize.Width;
-        _height = browserViewportEventArgs.BrowserWindowSize.Height;
-        return InvokeAsync(StateHasChanged);
-    }
-
-    public async ValueTask DisposeAsync() => await BrowserViewportService.UnsubscribeAsync(this);
-}

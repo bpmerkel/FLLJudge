@@ -47,16 +47,3 @@
         <MudButton Color="Color.Warning" OnClick="Submit" Variant="Variant.Filled">Ok</MudButton>
     </DialogActions>
 </MudDialog>
-
-@code {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
-    void Submit() => MudDialog.Close(DialogResult.Ok(true));
-
-    string GetVersion()
-    {
-        var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-        var buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
-        return $"{version} - {buildDate:ddd MM-dd-yyyy hh\\:mm tt}";
-    }
-}
