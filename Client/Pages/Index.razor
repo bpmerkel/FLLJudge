@@ -64,26 +64,26 @@
                                     <MudListItem Expanded="true" InitiallyExpanded="true">
                                         <ChildContent>
                                             <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@GetSectionName(section.section)</MudText>
-                                            </ChildContent>
-                                            <NestedList>
-                                                @foreach (var comment in section.comments)
+                                        </ChildContent>
+                                        <NestedList>
+                                            @foreach (var comment in section.comments)
+                                            {
+                                                if (!FilterOn || (FilterOn && comment.Selected))
                                                 {
-                                                    if (!FilterOn || (FilterOn && comment.Selected))
-                                                    {
-                                                        <MudListItem>
+                                                    <MudListItem>
                                                         <MudCheckBox @bind-Value="comment.Selected" Dense="true" Color="@Color.Primary">
-                                                                <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
-                                                                    <MudHighlighter Text="@comment.Text"
+                                                            <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
+                                                                <MudHighlighter Text="@comment.Text"
                                                                                 Class="highlighted"
                                                                                 UntilNextBoundary="true"
                                                                                 CaseSensitive="false"
                                                                                 Markup="true"
                                                                                 HighlightedTexts="@SearchTerms" />
-                                                                </MudText>
-                                                            </MudCheckBox>
-                                                        </MudListItem>
-                                                    }
+                                                            </MudText>
+                                                        </MudCheckBox>
+                                                    </MudListItem>
                                                 }
+                                            }
                                         </NestedList>
                                     </MudListItem>
                                 }
