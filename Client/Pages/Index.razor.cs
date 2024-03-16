@@ -16,7 +16,7 @@ public partial class Index
     private MudChip[] selected;
     private MudListItem selectedItem;
     private IEnumerable<string> SearchTerms => selected == null
-        ? Array.Empty<string>()
+        ? []
         : selected.Select(c => c.Text);
     private int _width = 0;
     private bool IsSmallScreen => _width < 900;
