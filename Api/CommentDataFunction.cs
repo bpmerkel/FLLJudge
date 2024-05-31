@@ -9,15 +9,27 @@ using Microsoft.Extensions.Logging;
 
 namespace ApiIsolated;
 
+/// <summary>
+/// Represents a class that handles HTTP triggers.
+/// </summary>
 public class HttpTrigger
 {
     private readonly ILogger _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="HttpTrigger"/> class.
+    /// </summary>
+    /// <param name="loggerFactory">The logger factory.</param>
     public HttpTrigger(ILoggerFactory loggerFactory)
     {
         _logger = loggerFactory.CreateLogger<HttpTrigger>();
     }
 
+    /// <summary>
+    /// Runs the HTTP trigger.
+    /// </summary>
+    /// <param name="req">The HTTP request data.</param>
+    /// <returns>The HTTP response data.</returns>
     [Function("CommentDataFunction")]
     public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
     {
@@ -37,6 +49,11 @@ public class HttpTrigger
         return response;
     }
 
+    /// <summary>
+    /// Gets the summary based on the temperature.
+    /// </summary>
+    /// <param name="temp">The temperature.</param>
+    /// <returns>The summary.</returns>
     private string GetSummary(int temp) =>
          temp switch
          {
