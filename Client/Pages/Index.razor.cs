@@ -174,5 +174,9 @@ public partial class Index
     /// <summary>
     /// Disposes the component.
     /// </summary>
-    public async ValueTask DisposeAsync() => await BrowserViewportService.UnsubscribeAsync(this);
+    public async ValueTask DisposeAsync()
+    {
+        await BrowserViewportService.UnsubscribeAsync(this);
+        GC.SuppressFinalize(this);
+    }
 }

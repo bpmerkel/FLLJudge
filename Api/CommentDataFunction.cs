@@ -12,18 +12,13 @@ namespace ApiIsolated;
 /// <summary>
 /// Represents a class that handles HTTP triggers.
 /// </summary>
-public class HttpTrigger
+/// <remarks>
+/// Initializes a new instance of the <see cref="HttpTrigger"/> class.
+/// </remarks>
+/// <param name="loggerFactory">The logger factory.</param>
+public class HttpTrigger(ILoggerFactory loggerFactory)
 {
-    private readonly ILogger _logger;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="HttpTrigger"/> class.
-    /// </summary>
-    /// <param name="loggerFactory">The logger factory.</param>
-    public HttpTrigger(ILoggerFactory loggerFactory)
-    {
-        _logger = loggerFactory.CreateLogger<HttpTrigger>();
-    }
+    private readonly ILogger _logger = loggerFactory.CreateLogger<HttpTrigger>();
 
     /// <summary>
     /// Runs the HTTP trigger.
@@ -43,7 +38,7 @@ public class HttpTrigger
             .ToArray();
 
         var response = req.CreateResponse(HttpStatusCode.OK);
-        response.WriteAsJsonAsync(result);
+        response.WriteAsJsonAsync(result).AsTask().Wait();
 
         _logger.LogMetric("TransactionTimeNS", sw.Elapsed.TotalNanoseconds);
         return response;
