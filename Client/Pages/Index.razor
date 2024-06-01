@@ -57,6 +57,13 @@
                                         <MudChip Text="@tag.Text" Variant="Variant.Text" Color="Color.Warning" Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)">@tag.Text (@tag.Count)</MudChip>
                                     }
                                 </MudChipSet>
+                                <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
+                                    Balance positive with constructive feedback.
+                                    Be specific rather than generalizing, and make sure the team
+                                    understands your point. Always start and end on a positive note.
+                                    Call out their strengths (areas where they Accomplished or Exceeded) and
+                                    identify areas for improvement (areas where they were Beginning or Developing).
+                                </MudText>
                             }
                             <MudList Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
                                 @foreach (var section in area.Comments.GroupBy(c => c.Section).Select(g => new { section = g.Key, comments = g.ToList() }))

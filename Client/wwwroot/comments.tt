@@ -7,7 +7,8 @@
 <#@ output extension="json" #>
 <#
 // generate the comments JSON file from the comments.CSV file
-var lines = File.ReadAllLines("Client\\wwwroot\\comments.csv")
+var dir = Path.GetDirectoryName(Host.TemplateFile);
+var lines = File.ReadAllLines(Path.Combine(dir, "comments.csv"))
     .Skip(1)
     .Select(line => line.Split(",".ToCharArray(), 3))
     .Select(a => new { area = a[0], section = a[1], comment = a[2].Trim('\"')})
@@ -15,18 +16,15 @@ var lines = File.ReadAllLines("Client\\wwwroot\\comments.csv")
 
 var areas = lines
     .GroupBy(line => line.area)
-    .Select(g => new { area = g.Key, comments = g.ToList()})
+    .Select(g => new { area = g.Key, comments = g.OrderBy(c => c.comment).ToList()})
     .ToList();
 
-//We really liked __
-//Your __ is really impressive!
-//Consider __ (or have you considered?) using to __
-//
-//Be sure to call out their strengths, (areas where they Exceeded), and identify areas for improvement (areas where they were Beginning or Developing).
-//Try as best as possible to balance positive with constructive feedback.
-//Be specific rather than generalizing, and make sure the team understands your point.
-//Always start and end on a positive note.
-// areas = < #= string.Join(", ", areas.Select(a => a.area)) # >
+/*
+Try to balance positive with constructive feedback.
+Be specific rather than generalizing, and make sure the team understands your point. Always start and end on a positive note.
+Call out their strengths (areas where they Accomplished or Exceeded), using phrases like:
+Also identify areas for improvement (areas where they were Beginning or Developing), using phrases like:
+*/
 #>
 {
   "areas": [

@@ -31,7 +31,7 @@ public class Model
         foreach (var area in model.Areas)
         {
             area.Tags = area.Comments
-                .SelectMany(c => c.Text.Split(" \t;.:,'".ToCharArray()))
+                .SelectMany(c => c.Text.Split(" \t;.:,'".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 .Where(w => w.Length > 4)
                 .Select(w => w.ToLower())
                 .GroupBy(w => w)
