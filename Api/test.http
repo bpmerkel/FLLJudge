@@ -1,0 +1,7 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@base = http://localhost:7071/api/CommentDataFunction
+
+# Get the comments
+GET {{base}}
+Accept: application/json
