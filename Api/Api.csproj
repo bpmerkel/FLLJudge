@@ -19,6 +19,9 @@
     </Content>
     <Content Include="comments.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>comments.tt</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -12,26 +12,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.6" PrivateAssets="all" />
-    <PackageReference Include="MudBlazor" Version="6.19.1" />
+    <PackageReference Include="MudBlazor" Version="6.20.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <TreatAsUsed>true</TreatAsUsed>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\comments.json">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>comments.tt</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\comments.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>comments.json</LastGenOutput>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

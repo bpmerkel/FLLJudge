@@ -19,6 +19,7 @@ namespace ApiIsolated;
 public class CommentDataFunction
 {
     private readonly ILogger _logger;
+    private static Model _model = null;     // keep local to cache the deserialization
 
     public CommentDataFunction(ILoggerFactory loggerFactory)
     {
@@ -30,16 +31,20 @@ public class CommentDataFunction
     /// </summary>
     /// <param name="req">The HTTP request data.</param>
     /// <returns>The HTTP response data.</returns>
-    [Function("CommentDataFunction")]
+    [Function(nameof(CommentDataFunction))]
     public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
     {
         var sw = Stopwatch.StartNew();
-        string fileName = "comments.json";
-        using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-        var model = JsonSerializer.Deserialize<Model>(fileStream);
+        if (_model == null)
+        {
+            string fileName = "comments.json";
+            using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            _model = JsonSerializer.Deserialize<Model>(fileStream);
+        }
+
         var response = req.CreateResponse(HttpStatusCode.OK);
-        response.WriteAsJsonAsync(model).AsTask().Wait();
-        _logger.LogMetric("TransactionTimeNS", sw.Elapsed.TotalMilliseconds);
+        response.WriteAsJsonAsync(_model).AsTask().Wait();
+        _logger.LogMetric("TransactionTimeMS", sw.Elapsed.TotalMilliseconds);
         return response;
     }
 }
