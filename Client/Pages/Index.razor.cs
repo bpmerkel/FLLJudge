@@ -44,12 +44,12 @@ public partial class Index
     /// <summary>
     /// Represents the selected chips.
     /// </summary>
-    private MudChip[] selected;
+    private MudChip<Tag>[] selected;
 
     /// <summary>
     /// Represents the selected item.
     /// </summary>
-    private MudListItem selectedItem;
+    private MudListItem<Comment> selectedItem;
 
     /// <summary>
     /// Gets the search terms.
@@ -97,7 +97,7 @@ public partial class Index
     {
         MaxWidth = MaxWidth.Large,
         CloseButton = true,
-        DisableBackdropClick = true,
+        BackdropClick = false,
         NoHeader = false,
         Position = DialogPosition.Center,
         CloseOnEscapeKey = true

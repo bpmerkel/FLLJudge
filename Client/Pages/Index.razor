@@ -51,10 +51,10 @@
                         <MudTabPanel Text="@GetAreaName(area.Name)" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
                             @if (!FilterOn)
                             {
-                                <MudChipSet MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
+                                <MudChipSet T="Tag" MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
                                     @foreach (var tag in area.Tags)
                                     {
-                                        <MudChip Text="@tag.Text" Variant="Variant.Text" Color="Color.Warning" Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)">@tag.Text (@tag.Count)</MudChip>
+                                        <MudChip T="Tag" Text="@tag.Text" Variant="Variant.Text" Color="Color.Warning" Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)">@tag.Text (@tag.Count)</MudChip>
                                     }
                                 </MudChipSet>
                                 <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
@@ -65,19 +65,19 @@
                                     identify areas for improvement (areas where they were Beginning or Developing).
                                 </MudText>
                             }
-                            <MudList Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
-                                @foreach (var section in area.Comments.GroupBy(c => c.Section).Select(g => new { section = g.Key, comments = g.ToList() }))
+                            <MudList T="Comment" Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
+                                @foreach (var comments in area.Comments.GroupBy(c => c.Section).Select(g =>  g.ToList()))
                                 {
                                     <MudListItem Expanded="true" InitiallyExpanded="true">
                                         <ChildContent>
-                                            <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@GetSectionName(section.section)</MudText>
+                                            <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@GetSectionName(comments.First().Section)</MudText>
                                         </ChildContent>
                                         <NestedList>
-                                            @foreach (var comment in section.comments)
+                                            @foreach (var comment in comments)
                                             {
                                                 if (!FilterOn || (FilterOn && comment.Selected))
                                                 {
-                                                    <MudListItem>
+                                                    <MudListItem T="Comment">
                                                         <MudCheckBox @bind-Value="comment.Selected" Dense="true" Color="@Color.Primary">
                                                             <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
                                                                 <MudHighlighter Text="@comment.Text"
