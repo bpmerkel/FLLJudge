@@ -54,7 +54,7 @@
                                 <MudChipSet T="Tag" MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
                                     @foreach (var tag in area.Tags)
                                     {
-                                        <MudChip T="Tag" Text="@tag.Text" Variant="Variant.Text" Color="Color.Warning" Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)">@tag.Text (@tag.Count)</MudChip>
+                                        <MudChip T="Tag" Variant="Variant.Text" Color="Color.Warning" Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)">@tag.Text (@tag.Count)</MudChip>
                                     }
                                 </MudChipSet>
                                 <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
