@@ -49,7 +49,7 @@ public partial class Index
     /// <summary>
     /// Represents the selected item.
     /// </summary>
-    private MudListItem<Comment> selectedItem;
+    private Comment selectedItem;
 
     /// <summary>
     /// Gets the search terms.
@@ -106,7 +106,7 @@ public partial class Index
     /// <summary>
     /// Gets the name of the section.
     /// </summary>
-    private string GetSectionName(Comment.Sections section) => section switch
+    private static string GetSectionName(Comment.Sections section) => section switch
     {
         Comment.Sections.ThinkAbout => "Think about...",
         Comment.Sections.GreatJob => "Great job...",

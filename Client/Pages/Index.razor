@@ -18,7 +18,7 @@
                 <MudTooltip Text="Show selections only">
                     <MudCheckBox @bind-Value="FilterOn"
                                  Disabled="@(!model.Areas.Any(a => a.Comments.Any(c => c.Selected)))"
-                                 Color="Color.Warning" UnCheckedColor="@Color.Success"
+                                 Color="Color.Warning" UncheckedColor="@Color.Success"
                                  Dense="true"
                                  CheckedIcon="@Icons.Material.Filled.FilterListOff"
                                  UncheckedIcon="@Icons.Material.Filled.FilterList">
@@ -67,10 +67,10 @@
                                     identify areas for improvement (areas where they were Beginning or Developing).
                                 </MudText>
                             }
-                            <MudList T="Comment" Clickable="true" Dense="true" @bind-SelectedItem="selectedItem" Color="Color.Primary">
+                            <MudList T="Comment" Dense="true" @bind-SelectedValue="selectedItem" Color="Color.Primary">
                                 @foreach (var comments in area.Comments.GroupBy(c => c.Section).Select(g =>  g.ToList()))
                                 {
-                                    <MudListItem Expanded="true" InitiallyExpanded="true">
+                                    <MudListItem Expanded="true">
                                         <ChildContent>
                                             <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@GetSectionName(comments.First().Section)</MudText>
                                         </ChildContent>
