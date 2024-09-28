@@ -42,21 +42,9 @@ public partial class Index
     private bool FilterOn;
 
     /// <summary>
-    /// Represents the selected chips.
-    /// </summary>
-    private MudChip<Tag>[] selected;
-
-    /// <summary>
     /// Represents the selected item.
     /// </summary>
     private Comment selectedItem;
-
-    /// <summary>
-    /// Gets the search terms.
-    /// </summary>
-    private IEnumerable<string> SearchTerms => selected == null
-        ? []
-        : selected.Select(c => c.Text);
 
     /// <summary>
     /// Represents the width of the browser viewport.
@@ -142,7 +130,6 @@ public partial class Index
             a.Comments.ForEach(c => c.Selected = false);
         });
 
-        selected = [];
         selectedItem = null;
         FilterOn = false;
         StateHasChanged();

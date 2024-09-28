@@ -3,3 +3,12 @@
     font-weight: bold;
     color: var(--mud-palette-warning) !important;
 }
+
+.bold {
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.normal {
+    font-weight: normal;
+}

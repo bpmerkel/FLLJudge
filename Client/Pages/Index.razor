@@ -51,14 +51,6 @@
                         <MudTabPanel Text="@GetAreaName(area.Name)" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
                             @if (!FilterOn)
                             {
-@*
-                                <MudChipSet T="Tag" MultiSelection="true" Filter="true" @bind-SelectedChips="selected">
-                                    @foreach (var tag in area.Tags)
-                                    {
-                                        <MudChip T="Tag" Variant="Variant.Text" Color="Color.Warning" Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)">@tag.Text (@tag.Count)</MudChip>
-                                    }
-                                </MudChipSet>
- *@
                                 <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
                                     Balance positive with constructive feedback.
                                     Be specific rather than generalizing, and make sure the team
@@ -81,13 +73,8 @@
                                                 {
                                                     <MudListItem T="Comment">
                                                         <MudCheckBox @bind-Value="comment.Selected" Dense="true" Color="@Color.Primary">
-                                                            <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
-                                                                <MudHighlighter Text="@comment.Text"
-                                                                                Class="highlighted"
-                                                                                UntilNextBoundary="true"
-                                                                                CaseSensitive="false"
-                                                                                Markup="true"
-                                                                                HighlightedTexts="@SearchTerms" />
+                                                            <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true" Class="@(comment.Selected ? "bold" : "normal")">
+                                                                @comment.Text
                                                             </MudText>
                                                         </MudCheckBox>
                                                     </MudListItem>
