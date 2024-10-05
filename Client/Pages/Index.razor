@@ -60,7 +60,7 @@
                                 </MudText>
                             }
                             <MudList T="Comment" Dense="true" @bind-SelectedValue="selectedItem" Color="Color.Primary">
-                                @foreach (var comments in area.Comments.GroupBy(c => c.Section).Select(g =>  g.ToList()))
+                                @foreach (var comments in area.Comments.OrderBy(c => c.Section).GroupBy(c => c.Section).Select(g => g.ToList()))
                                 {
                                     <MudListItem Expanded="true">
                                         <ChildContent>
