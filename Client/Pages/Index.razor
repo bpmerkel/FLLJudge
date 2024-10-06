@@ -17,11 +17,11 @@
 
                 <MudTooltip Text="Show selections only">
                     <MudCheckBox @bind-Value="FilterOn"
-                                 Disabled="@(!model.Areas.Any(a => a.Comments.Any(c => c.Selected)))"
-                                 Color="Color.Warning" UncheckedColor="@Color.Success"
-                                 Dense="true"
-                                 CheckedIcon="@Icons.Material.Filled.FilterListOff"
-                                 UncheckedIcon="@Icons.Material.Filled.FilterList">
+                        Disabled="@(!model.Areas.Any(a => a.Comments.Any(c => c.Selected)))"
+                        Color="Color.Warning" UncheckedColor="@Color.Success"
+                        Dense="true"
+                        CheckedIcon="@Icons.Material.Filled.FilterListOff"
+                        UncheckedIcon="@Icons.Material.Filled.FilterList">
                         <MudText Typo="Typo.body2" Inline="true">@(FilterOn ? "SHOW ALL" : "SHOW SELECTIONS")</MudText>
                     </MudCheckBox>
                 </MudTooltip>
@@ -31,11 +31,11 @@
                 </MudTooltip>
 
                 <MudCheckBox @bind-Value="fontSize"
-                             Dense="true" Color="@Color.Secondary" TriState="true"
-                             CheckedIcon="@Icons.Material.Filled.FormatSize"
-                             IndeterminateIcon="@Icons.Material.Filled.FormatSize"
-                             UncheckedIcon="@Icons.Material.Filled.FormatSize"
-                             Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)" />
+                    Dense="true" Color="@Color.Secondary" TriState="true"
+                    CheckedIcon="@Icons.Material.Filled.FormatSize"
+                    IndeterminateIcon="@Icons.Material.Filled.FormatSize"
+                    UncheckedIcon="@Icons.Material.Filled.FormatSize"
+                    Size="@(fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium)" />
 
                 @if (!IsSmallScreen)
                 {
@@ -44,25 +44,43 @@
                 }
             </MudAppBar>
 
-            <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Warning" ApplyEffectsToContainer="true" AlwaysShowScrollButtons="true" MinimumTabWidth="90">
-                <ChildContent>
-                    @foreach (var area in model.Areas)
-                    {
-                        <MudTabPanel Text="@GetAreaName(area.Name)" BadgeDot="@(!area.Comments.Any(c => c.Selected))" BadgeData="@area.Comments.Count(c => c.Selected)" BadgeColor="@(area.Comments.Any(c => c.Selected) ? Color.Error : Color.Transparent)">
-                            @if (!FilterOn)
+            @if (!FilterOn)
+            {
+                <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
+                    Balance positive with constructive feedback.
+                    Be specific rather than generalizing, and make sure the team understands your point.
+                    Always start and end on a positive note.
+                    Call out their strengths (areas where they Accomplished or Exceeded) and
+                    identify areas for improvement (areas where they were Beginning or Developing).
+                </MudText>
+            }
+
+            <MudExpansionPanels MultiExpansion="true" Dense="true" Gutters="false">
+                @foreach (var area in model.Areas)
+                {
+                    var areaInfo = GetAreaInfo(area.Name);
+                    <MudExpansionPanel Expanded="true">
+                        <TitleContent>
+                            <div style="background-color: @areaInfo.color; padding-left: 1em; display: flex; align-items: center">
+                                <MudText Color="@Color.Dark" Typo="@(fontSize == null ? Typo.h3 : fontSize == true ? Typo.h5 : Typo.h4)" Style="font-weight: bold" GutterBottom="false" Inline="true">
+                                    @area.Name
+                                </MudText>
+                            @if (!IsSmallScreen)
                             {
-                                <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
-                                    Balance positive with constructive feedback.
-                                    Be specific rather than generalizing, and make sure the team
-                                    understands your point. Always start and end on a positive note.
-                                    Call out their strengths (areas where they Accomplished or Exceeded) and
-                                    identify areas for improvement (areas where they were Beginning or Developing).
+                                <MudText Color="@Color.Dark" Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
+                                    &nbsp;&mdash;&nbsp;
+                                </MudText>
+                                <MudText Color="@Color.Dark" Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true">
+                                    @areaInfo.description
                                 </MudText>
                             }
+                            </div>
+                        </TitleContent>
+                        <ChildContent>
                             <MudList T="Comment" Dense="true" @bind-SelectedValue="selectedItem" Color="Color.Primary">
                                 @foreach (var comments in area.Comments.OrderBy(c => c.Section).GroupBy(c => c.Section).Select(g => g.ToList()))
                                 {
-                                    <MudListItem Expanded="true">
+                                    <MudListItem Expanded="true" Dense="true">
                                         <ChildContent>
                                             <MudText Typo="@(fontSize == null ? Typo.h4 : fontSize == true ? Typo.h6 : Typo.h5)" Color="Color.Secondary">@GetSectionName(comments.First().Section)</MudText>
                                         </ChildContent>
@@ -71,7 +89,7 @@
                                             {
                                                 if (!FilterOn || (FilterOn && comment.Selected))
                                                 {
-                                                    <MudListItem T="Comment">
+                                                    <MudListItem T="Comment" Dense="true">
                                                         <MudCheckBox @bind-Value="comment.Selected" Dense="true" Color="@Color.Primary">
                                                             <MudText Typo="@(fontSize == null ? Typo.h5 : fontSize == true ? Typo.body1 : Typo.h6)" GutterBottom="false" Inline="true" Class="@(comment.Selected ? "bold" : "normal")">
                                                                 @comment.Text
@@ -84,10 +102,10 @@
                                     </MudListItem>
                                 }
                             </MudList>
-                        </MudTabPanel>
-                    }
-                </ChildContent>
-            </MudTabs>
+                        </ChildContent>
+                    </MudExpansionPanel>
+                }
+            </MudExpansionPanels>
         }
     </MudMainContent>
 </MudLayout>

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MudBlazor.Services;
+using System.Reflection;
+using System.Security.Principal;
 
 namespace FLLJudge.Client.Pages;
 
@@ -29,7 +31,7 @@ public partial class Index
     /// <summary>
     /// Gets or sets the font size.
     /// </summary>
-    private bool? fontSize = true; // tri-state; fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium
+    private bool? fontSize = false; // tri-state; fontSize == null ? Size.Large : fontSize == true ? Size.Small : Size.Medium
 
     /// <summary>
     /// Represents the model of the application.
@@ -103,21 +105,17 @@ public partial class Index
 
     /// <summary>
     /// Gets the name of the area.
+    /// #fcd2c0
+    /// #c6eafa
+    /// #cbe6d3
     /// </summary>
-    private string GetAreaName(string Name)
+    private static (string description, string color) GetAreaInfo(string Name) => Name switch
     {
-        if (IsSmallScreen)
-        {
-            return Name switch
-            {
-                "Core Values" => "CV",
-                "Innovation Project" => "IP",
-                "Robot Design" => "RD",
-                _ => Name
-            };
-        }
-        return Name;
-    }
+        "Core Values" => ("How did the team demonstrate teamwork, discovery, inclusion, innovation, impact, and fun in their work?", "#fcd2c0"),
+        "Innovation Project" => ("How did the team identify and approach solving a problem connected to the season theme?", "#c6eafa"),
+        "Robot Design" => ("How did the team approach solving robot game missions using building and coding?", "#cbe6d3"),
+        _ => (string.Empty, "#000000")
+    };
 
     /// <summary>
     /// Resets the component.
