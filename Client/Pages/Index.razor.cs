@@ -1,10 +1,8 @@
-using FLLJudge.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MudBlazor.Services;
-using System.Reflection;
-using System.Security.Principal;
+using FLLJudge.Shared;
 
 namespace FLLJudge.Client.Pages;
 
