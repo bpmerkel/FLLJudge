@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using FLLJudge.Client.Pages;
 using FLLJudge.Shared;
+using System.Diagnostics;
 
 // Create a WebAssemblyHostBuilder with default configuration
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -31,6 +32,8 @@ async static Task<Model> GetModel(Uri baseAddress)
 {
     // Fetch the JSON file from the server
     // see https://stackoverflow.com/questions/58523617/blazor-client-side-webassembly-reading-a-json-file-on-startup-cs
+
+    Debug.WriteLine($"Fetching model from {baseAddress}");
     using var httpClient = new HttpClient();
     var url = new Uri(baseAddress, "/api/CommentDataFunction");
     var model = await httpClient.GetFromJsonAsync<Model>(url)
