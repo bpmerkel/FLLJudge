@@ -13,8 +13,7 @@ builder.RootComponents.Add<App>("#app");
 // Add the root component "HeadOutlet" to the builder
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-var apiHostAddress = new Uri(builder.Configuration["API_Prefix"] ?? builder.HostEnvironment.BaseAddress);
-
+var apiHostAddress = new Uri(builder.HostEnvironment.BaseAddress);  // builder.Configuration["API_Prefix"] ??
 // Add a singleton service of type Model to the builder
 builder.Services.AddSingleton(s => GetModel(apiHostAddress));
 // Add MudBlazor services to the builder
@@ -33,9 +32,10 @@ async static Task<Model> GetModel(Uri baseAddress)
     // Fetch the JSON file from the server
     // see https://stackoverflow.com/questions/58523617/blazor-client-side-webassembly-reading-a-json-file-on-startup-cs
 
-    Debug.WriteLine($"Fetching model from {baseAddress}");
     using var httpClient = new HttpClient();
-    var url = new Uri(baseAddress, "/api/CommentDataFunction");
+    //var url = new Uri(baseAddress, "/api/CommentDataFunction");
+    var url = new Uri(baseAddress, "/Model/comments.json");
+    Debug.WriteLine(url.AbsoluteUri);
     var model = await httpClient.GetFromJsonAsync<Model>(url)
         .ConfigureAwait(false);
 
