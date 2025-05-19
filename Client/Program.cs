@@ -1,11 +1,3 @@
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using MudBlazor.Services;
-using FLLJudge.Client.Pages;
-using FLLJudge.Shared;
-using System.Diagnostics;
-
 // Create a WebAssemblyHostBuilder with default configuration
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 // Add the root component "App" to the builder

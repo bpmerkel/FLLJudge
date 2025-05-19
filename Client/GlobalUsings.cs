@@ -1,0 +1,9 @@
+﻿global using Microsoft.AspNetCore.Components.Web;
+global using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+global using Microsoft.AspNetCore.Components;
+global using System.Net.Http.Json;
+global using FLLJudge.Client.Pages;
+global using FLLJudge.Shared;
+global using System.Diagnostics;
+global using MudBlazor;
+global using MudBlazor.Services;
