@@ -3,7 +3,7 @@ namespace FLLJudge.Client.Pages;
 /// <summary>
 /// Represents the main page of the application.
 /// </summary>
-public partial class Index
+public partial class Index: IBrowserViewportObserver, IAsyncDisposable
 {
     /// <summary>
     /// Gets or sets the task to get the model.
