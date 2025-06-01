@@ -16,15 +16,10 @@ namespace ApiIsolated;
 /// Initializes a new instance of the <see cref="HttpTrigger"/> class.
 /// </remarks>
 /// <param name="loggerFactory">The logger factory.</param>
-public class CommentDataFunction
+public class CommentDataFunction(ILoggerFactory loggerFactory)
 {
-    private readonly ILogger _logger;
+    private readonly ILogger _logger = loggerFactory.CreateLogger<CommentDataFunction>();
     private static Model _model = null;     // keep local to cache the deserialization
-
-    public CommentDataFunction(ILoggerFactory loggerFactory)
-    {
-        _logger = loggerFactory.CreateLogger<CommentDataFunction>();
-    }
 
     /// <summary>
     /// Runs the HTTP trigger.
@@ -37,7 +32,7 @@ public class CommentDataFunction
         var sw = Stopwatch.StartNew();
         if (_model == null)
         {
-            string fileName = "comments.json";
+            var fileName = "comments.json";
             using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             _model = JsonSerializer.Deserialize<Model>(fileStream);
         }
